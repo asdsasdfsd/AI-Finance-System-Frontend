@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Table, Button, Modal, Form, Input, InputNumber, DatePicker,
-  Select, Switch, Space, message, Card, Typography
+  Select, Space, message, Card
 } from 'antd';
 import {
   PlusOutlined,
@@ -12,7 +12,6 @@ import {
 import dayjs from 'dayjs';
 import AssetService from '../../services/assetService';
 
-const { Text } = Typography;
 const { Option } = Select;
 
 const AssetManagement = () => {

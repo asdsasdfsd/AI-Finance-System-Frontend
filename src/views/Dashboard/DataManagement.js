@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import { Table, Button, Space, Card } from 'antd';
+import { Table, Button, Card } from 'antd';
 import '../../assets/styles/DataManagement.css';
 
 export default function FinancialDashboard() {
