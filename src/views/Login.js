@@ -1,4 +1,3 @@
-// frontend/src/views/Login.js
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Tabs, Checkbox, Typography, Divider, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -11,11 +10,9 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Check if user is already logged in
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const hasError = urlParams.has('error') || urlParams.has('error_description');
-    
     if (hasError) {
       navigate('/');
       return;
@@ -34,7 +31,7 @@ const Login = () => {
       message.success('Login successful');
       navigate('/dashboard');
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Login failed. Please check your credentials.';
+      const errorMessage = error?.response?.data?.message || 'Login failed. Please check your credentials.';
       message.error(errorMessage);
     } finally {
       setLoading(false);
@@ -48,9 +45,7 @@ const Login = () => {
       window.location.href = ssoUrl;
     } catch (error) {
       console.error('SSO Login Error:', error);
-      const errorMsg = error.response?.data?.message || 
-                     error.response?.data?.error || 
-                     'Microsoft Login Init Failure';
+      const errorMsg = error?.response?.data?.message || error?.response?.data?.error || 'Microsoft Login Init Failure';
       message.error(errorMsg);
     } finally {
       setLoading(false);
@@ -81,18 +76,32 @@ const Login = () => {
               label: 'Login with Username',
               children: (
                 <Form name="login" onFinish={onFinish} layout="vertical">
-                  <Form.Item name="username" label="Username" rules={[{ required: true, message: 'Please enter your username' }]}>
+                  <Form.Item
+                    name="username"
+                    label="Username"
+                    rules={[{ required: true, message: 'Please enter your username' }]}
+                  >
                     <Input placeholder="Username" />
                   </Form.Item>
-                  <Form.Item name="password" label="Password" rules={[{ required: true, message: 'Please enter your password' }]}>
+
+                  <Form.Item
+                    name="password"
+                    label="Password"
+                    rules={[{ required: true, message: 'Please enter your password' }]}
+                  >
                     <Input.Password placeholder="Password" />
                   </Form.Item>
+
+                  {/* ✅ Form.Item 只包裹表单控件 */}
                   <Form.Item name="remember" valuePropName="checked">
                     <Checkbox>Remember me</Checkbox>
-                    <a style={{ float: 'right' }} href="/forgot-password">
-                      Forgot password
-                    </a>
                   </Form.Item>
+
+                  {/* ✅ Forgot password 链接独立出来 */}
+                  <div style={{ textAlign: 'right', marginBottom: 16 }}>
+                    <a href="/forgot-password">Forgot password</a>
+                  </div>
+
                   <Form.Item>
                     <Button type="primary" htmlType="submit" block loading={loading}>
                       Login
@@ -106,13 +115,21 @@ const Login = () => {
               label: 'Login with Email',
               children: (
                 <Form name="email-login" layout="vertical">
-                  <Form.Item name="email" label="Email" rules={[
-                    { required: true, message: 'Please enter your email' },
-                    { type: 'email', message: 'Please enter a valid email' }
-                  ]}>
+                  <Form.Item
+                    name="email"
+                    label="Email"
+                    rules={[
+                      { required: true, message: 'Please enter your email' },
+                      { type: 'email', message: 'Please enter a valid email' },
+                    ]}
+                  >
                     <Input placeholder="Email" />
                   </Form.Item>
-                  <Form.Item name="password" label="Password" rules={[{ required: true, message: 'Please enter your password' }]}>
+                  <Form.Item
+                    name="password"
+                    label="Password"
+                    rules={[{ required: true, message: 'Please enter your password' }]}
+                  >
                     <Input.Password placeholder="Password" />
                   </Form.Item>
                   <Form.Item>
@@ -136,7 +153,7 @@ const Login = () => {
         >
           Login with Microsoft SSO
         </Button>
-        
+
         <div style={{ marginTop: '20px', textAlign: 'center' }}>
           <Text>Don't have an account?</Text>
           <div style={{ marginTop: '10px', display: 'flex', justifyContent: 'space-between' }}>
