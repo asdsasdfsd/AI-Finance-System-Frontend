@@ -64,7 +64,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-form-box">
         <Title level={3} style={{ textAlign: 'center', marginBottom: 32 }}>
-          Welcome to AI Financial Management System
+          Welcome to AI-Financial-Management System
         </Title>
 
         <Tabs
