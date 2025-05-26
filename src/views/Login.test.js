@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Login from './Login';
 
-// ✅ mock 整个 authService 模块，防止 useEffect 
+// ✅ mock 整个 authService 模块，防止 useEffe
 jest.mock('../services/authService', () => ({
   __esModule: true,
   getCurrentUser: () => null,
